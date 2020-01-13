@@ -18,8 +18,8 @@ var myScore;
 var penguin = new Image();
 var ice = new Image();
 var iceu = new Image();
-var honk = new Audio('honk.wav');
-var honkdead= new Audio('honk.dead.wav');
+var honk = new Audio('sounds/honk.wav');
+var honkdead= new Audio('sounds/honk.dead.wav');
 var dead=false;
 
 penguin.onload = function(){
@@ -27,9 +27,9 @@ penguin.onload = function(){
   penguin.height=window.innerHeight/6;
   penguin.width*=penguin.height/oheight;
 }
-penguin.src="favicon.ico"
-iceu.src="iceu.png"
-ice.src="ice.png"
+penguin.src="icons/favicon.ico"
+iceu.src="icons/iceu.png"
+ice.src="icons/ice.png"
 
 function startGame() {
 	myGamePiece = new component(penguin.width, penguin.height, "black", 10, 120,"img");
@@ -39,7 +39,7 @@ function startGame() {
 }
 
 var background = new Image();
-background.src = "apa_2016_emperor-penguin_james_lusk_kk.jpg"
+background.src = "backgrounds/apa_2016_emperor-penguin_james_lusk_kk.jpg"
 
 
 var myGameArea = {
@@ -60,7 +60,7 @@ var myGameArea = {
 		},
 	clear : function() {
 		//this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.context.drawImage(background,0,0,this.canvas.width,this.canvas.height);
+		this.context.drawImage(background,0,0);
 	}
 }
 
@@ -121,7 +121,7 @@ function component(width, height, color, x, y, type) {
 			return false;
 		if(!dead) 
 			honkdead.play() ;
-		penguin.src="dead.png";
+		penguin.src="icons/dead.png";
 		dead=true;
 		return true;
 	}
