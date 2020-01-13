@@ -39,7 +39,7 @@ function startGame() {
 	myGameArea.start();
 }
 
-backgrounds= [ 
+background_names= [ 
 "1-adelie-penguins-species-1524251364.jpg",
 "1556175266452.jpg",
 "453801468-0.0.jpg",
@@ -58,9 +58,14 @@ backgrounds= [
 "south_shetland-2016-deception_islandchinstrap_penguin-pygoscelis_antarctica_04.jpg",
 "white-desert-antarctica-penguins.jpg",
 	]
-var background = new Image();
-background.src = "backgrounds/apa_2016_emperor-penguin_james_lusk_kk.jpg"
 
+var backgrounds = []
+
+background_names.forEach( function(url,i,a) {
+	backgrounds[i] = new Image()
+	backgrounds[i].src="backgrounds/" + url;
+});
+		
 
 var myGameArea = {
 	canvas : document.createElement("canvas"),
@@ -80,7 +85,18 @@ var myGameArea = {
 		},
 	clear : function() {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-		this.context.drawImage(background,0,0,background.width*this.canvas.height/background.height,this.canvas.height);
+		totalwidths=0
+		backgrounds.forEach( function(b,index,a) {
+			scale=myGameArea.canvas.height/b.height;
+			totalwidths+=b.width*scale
+		});
+		x=(myGameArea.frameNo%Math.floor(totalwidths));
+		t=0;
+		backgrounds.forEach( function(b,index,a) {
+			scale=myGameArea.canvas.height/b.height;
+			myGameArea.context.drawImage(b,t-x,0,b.width*scale,myGameArea.canvas.height);
+			t+=b.width*scale
+		});
 	}
 }
 
@@ -173,7 +189,6 @@ function updateGameArea() {
 		myObstacles[i].update();
 	}
 	myScore.text="SCORE: " + myGameArea.frameNo;
-	background.src="backgrounds/" + backgrounds[Math.floor(myGameArea.frameNo/1000)%backgrounds.length];
 	myScore.update();
 	myGamePiece.newPos();
 	myGamePiece.update();
