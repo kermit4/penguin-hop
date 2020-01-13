@@ -51,7 +51,12 @@ var myGameArea = {
 		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
 		this.frameNo = 0;
 		this.interval = setInterval(updateGameArea, 20);
-		this.canvas.addEventListener('click', function() {  myGamePiece.y-=penguin.height/4;myGamePiece.gravitySpeed=0; honk.cloneNode().play(); }, false);
+		this.canvas.addEventListener('click', function() {  
+			if(myGamePiece.y>0)
+				myGamePiece.y-=penguin.height/4;
+			myGamePiece.gravitySpeed=0; 
+			honk.cloneNode().play(); 
+			}, false);
 		},
 	clear : function() {
 		//this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
