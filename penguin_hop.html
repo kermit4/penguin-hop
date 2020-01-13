@@ -38,6 +38,25 @@ function startGame() {
 	myGameArea.start();
 }
 
+backgrounds= [ 
+"1-adelie-penguins-species-1524251364.jpg",
+"1556175266452.jpg",
+"453801468-0.0.jpg",
+"antarctica-wildlife-adelie-penguins-icehopping-istock-800x600-c-default.jpg",
+"apa_2016_emperor-penguin_james_lusk_kk.jpg",
+"be5cdbec-7185-42e7-a7ba-97729e67ce39-getty-1140484921.jpg",
+"ct-1555127310-0c1m9yk30o-snap-image.jpeg",
+"disneynature-penguins.jpg",
+"emperor-penguins-brave-a-storm-in-the-antarctica-jan-2016-800x450.jpg",
+"flipmedium_ww1103163.jpg",
+"gettyimages-200535469-001-437c76d.jpg",
+"medium_ww267491.jpg",
+"merlin_132075962_6583069c-4513-4de9-abf5-00033a9ab0f8-articlelarge.jpg",
+"penguins-1.jpg",
+"sfw_15586958314_eabee7f9c4_o.jpg",
+"south_shetland-2016-deception_islandchinstrap_penguin-pygoscelis_antarctica_04.jpg",
+"white-desert-antarctica-penguins.jpg",
+	]
 var background = new Image();
 background.src = "backgrounds/apa_2016_emperor-penguin_james_lusk_kk.jpg"
 
@@ -153,6 +172,7 @@ function updateGameArea() {
 		myObstacles[i].update();
 	}
 	myScore.text="SCORE: " + myGameArea.frameNo;
+	background.src="backgrounds/" + backgrounds[Math.floor(myGameArea.frameNo/1000)%backgrounds.length];
 	myScore.update();
 	myGamePiece.newPos();
 	myGamePiece.update();
