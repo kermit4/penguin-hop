@@ -21,12 +21,12 @@ var ice = new Image();
 var iceu = new Image();
 var honk = new Audio('sounds/honk.wav');
 var honkdead= new Audio('sounds/honk.dead.wav');
-var dead=false;
 
 penguin.onload = function(){
- oheight=penguin.height;
-  penguin.height=window.innerHeight/6;
-  penguin.width*=penguin.height/oheight;
+	oheight=penguin.height;
+	penguin.height=window.innerHeight/6;
+	penguin.width*=penguin.height/oheight;
+	myGamePiece.update();
 }
 penguin.src="icons/favicon.ico"
 iceu.src="icons/iceu.png"
@@ -155,10 +155,9 @@ function component(width, height, color, x, y, type) {
 		var otherbottom = otherobj.y + (otherobj.height);
 		if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) 
 			return false;
-		if(!dead) 
-			honkdead.play() ;
+		clearInterval(myGameArea.interval);
+		honkdead.play() ;
 		penguin.src="icons/dead.png";
-		dead=true;
 		return true;
 	}
 }
